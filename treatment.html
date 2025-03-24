@@ -1,0 +1,486 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pet Blog</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <style>
+        /* Sidebar Styling */
+        body {
+        background-color: #dcd7f8 !important;
+        font-family: "Poppins", sans-serif;
+    }
+        #sidebar {
+            width: 250px;
+            height: 100vh;
+            position: fixed;
+            top: 0;
+            left: -250px;
+            background: #f8f9fa;
+            transition: 0.3s;
+            padding-top: 60px;
+            box-shadow: 2px 0px 5px rgba(0, 0, 0, 0.1);
+        }
+        #sidebar.active {
+            left: 0;
+        }
+        .close-btn {
+            position: absolute;
+            top: 10px;
+            right: 15px;
+            font-size: 24px;
+            cursor: pointer;
+        }
+        /* Shift content when sidebar is open */
+        #content {
+            transition: margin-left 0.3s ease;
+        }
+        #content.shifted {
+            margin-left: 250px;
+        }
+        /* Hide blogs initially */
+        .blog {
+            display: none;
+        }
+        img.header__image-bg {
+            position: absolute;
+            top: 50%;
+            left: 0;
+            transform: translateY(-50%);
+            max-width: 300px !important;
+            z-index: -1;
+        }
+        .navbar-brand {
+        font-size: 1.8rem; /* Make 'Pet Place' bigger */
+        font-weight: bold;
+        color: black !important; /* Attractive color */
+    }
+
+    .navbar-nav .nav-link {
+        font-weight: bold; /* Bold all links */
+        font-size: 1.1rem; /* Slightly larger text */
+        transition: color 0.3s ease-in-out;
+    }
+
+    .navbar-nav .nav-link:hover {
+        color: #ff6600 !important; /* Change color on hover */
+    }
+
+    .navbar {
+        box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1); /* Adds a subtle shadow */
+        padding: 15px 20px; /* Extra padding for better spacing */
+    }
+    .hero {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 80vh;
+    text-align: left;
+    padding: 50px;
+}
+
+.hero-content {
+    max-width: 600px;
+}
+
+.hero-title {
+    font-size: 4rem;
+    font-weight: 800;
+    color: #3f3b57;
+}
+
+.hero-subtitle {
+    font-size: 1.2rem;
+    font-weight: 500;
+    color: #3f3b57;
+    font-weight: 500;
+
+}
+
+.hero-button {
+    background-color: #3f3b57;
+    color: white;
+    font-size: 1.1rem;
+    padding: 12px 25px;
+    border-radius: 50px;
+    border: none;
+    transition: 0.3s;
+}
+
+.hero-button:hover {
+    background-color: #3f3b57;
+}
+@keyframes gradientAnimation {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+/* Explore Blog Button */
+.explore-blog-btn {
+    background: linear-gradient(135deg, #7e5bef, #3d348b, #ff6ec4, #7e5bef);
+    background-size: 400% 400%;
+    color: white;
+    font-size: 1.5rem;  /* Bigger Font */
+    font-weight: bold;
+    padding: 18px 58px; /* Bigger Button */
+    border-radius: 50px;
+    border: none;
+    box-shadow: 0px 6px 15px rgba(0, 0, 0, 0.3);
+    transition: all 0.3s ease-in-out;
+    display: inline-block;
+    text-align: center;
+    animation: gradientAnimation 6s infinite linear; /* Continuous smooth animation */
+}
+
+/* Hover Effect */
+.explore-blog-btn:hover {
+    transform: translateY(-5px);
+    box-shadow: 0px 8px 20px rgba(0, 0, 0, 0.4);
+}
+.blog {
+    display: none;
+}
+img {
+    max-width: 100%;
+    display: block;
+}
+
+.image-full {
+    max-height: 300px;
+    width: 100%;
+    object-fit: cover;
+    margin-bottom: 2em;
+}
+.subtitle {
+    font-weight: 700;
+    color: #1792d2;
+    font-size: .75rem;
+    margin: 0;
+}
+
+.article-title {
+    font-size: 1.5rem;
+}
+
+.article-read-more,
+.article-info {
+    font-size: .875rem;
+}
+
+.article-read-more {
+    color: #1792d2;
+    text-decoration: none;
+    font-weight: 700;
+    letter-spacing: 1px;
+}
+
+.article-read-more:hover,
+.article-read-more:focus {
+    color: #143774;
+    text-decoration: underline;
+}
+
+.article-info {
+    margin: 2em 0;
+}
+
+.widget-title,
+.widget-recent-post-title {
+    font-size: 1rem;
+}
+
+.widget-title {
+    font-family: 'Ubuntu', sans-serif;
+    font-weight: 700;
+    letter-spacing: 2px;
+}
+
+.widget-recent-post-title {
+    color: #143774;
+}
+
+
+/* =================
+Layout
+================= */
+
+.container {
+    width: 95%;  /* Increased width */
+    max-width: 1200px;  /* Allow more space */
+    margin: 0 auto;
+}
+
+
+.container-flex {
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Center content */
+}
+
+header {
+    text-align: center;
+    padding: 20px 0;
+}
+
+footer {
+    background:#143774;
+    color: rgba(255, 255, 255, 0.8);
+    text-align: center;
+    padding:   0.2em 0;
+}
+
+@media (min-width: 675px) {
+    .container-flex {
+        flex-direction: column; /* Ensure stacking */
+        align-items: center; /* Center content */
+    }
+
+    main {
+        width: 90%; /* Allow more space */
+        max-width: 1000px;
+    }
+}
+/* articles */
+
+.article-featured {
+    width: 100%;  /* Allow full width */
+    max-width: 900px; /* Limit excessive stretching */
+    padding: 20px;
+    text-align: justify;
+}
+
+.article-recent {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 2em;
+}
+
+.article-recent-main {
+    order: 2;
+}
+
+.article-recent-secondary {
+    order: 1;
+}
+
+@media (min-width: 675px) {
+    .article-recent {
+        flex-direction: row;
+        justify-content: space-between;
+    }
+    
+    .article-recent-main {
+        width: 68%;
+    }
+    
+    .article-recent-secondary {
+        width: 30%;
+    }
+    
+    .article-featured {
+        display: flex;
+        flex-direction: column;
+    }
+    
+    .article-image {
+        width: 100%;  /* Full width */
+        max-height: 400px; /* Larger image */
+        object-fit: cover;
+    }
+    
+    .article-info {
+        order: -1;
+    }
+}
+
+/* widgets */
+
+.sidebar-widget {
+    border: 20px solid #efefef;
+    margin-bottom: 2em;
+    padding: 1em;
+}
+
+.widget-recent-post {
+    display: flex;
+    flex-direction: column;
+    border-bottom: 1px solid #707070;
+    margin-bottom: 1em;
+    line-height: 1.4;
+}
+
+.widget-recent-post:last-child {
+    border: 0;
+    margin: 0;
+}
+
+.widget-image {
+    order: -1;
+}
+    </style>
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#">Pet Place</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link" href="#" onclick="showHome()">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#about">About</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#store">Store</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#blogs">Blogs</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#contact">Contact</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Sidebar -->
+    <div id="sidebar">
+        <div class="text-center fw-bold py-3">Blog Topics</div>
+        <span class="close-btn" onclick="toggleSidebar()">&times;</span>
+        <ul class="list-group">
+            <li class="list-group-item" onclick="showBlog(1)">Managing Skin Allergies</li>
+            <li class="list-group-item" onclick="showBlog(2)">Ear Infections in Dogs</li>
+            <li class="list-group-item" onclick="showBlog(3)">Canine Arthritis</li>
+        </ul>
+    </div>
+    
+
+    <section class="hero">
+    <!-- Main Content -->
+    <div id="content" class="container mt-4" style="background-color: #dcd7f8;">
+        <div class="row align-items-center">
+            <!-- Left Side (Image) -->
+            <div class="col-md-6 position-relative">
+                <!-- Translucent Background Image -->
+                <img src="assets/header-bg.png" class="img-fluid w-100 opacity-50" alt="header">
+            
+                <!-- Overlapping Foreground Image (Smaller) -->
+                <img src="assets/treatment.png" alt="treatment" class="img-fluid position-absolute top-50 start-50 translate-middle" style="max-width: 70%;">
+            </div>
+            
+            
+            
+
+
+            <!-- Right Side (Text + Button) -->
+            <div class="col-md-6 text-center">
+                <h1 class="hero-title">Pet Doctor</h1>
+                <p class="hero-subtitle">We love pets like you do :)</p>
+                <p class="hero-subtitle">
+                    From routine check-ups to specialized treatments, we ensure your pets lead happy, healthy lives.
+                </p>
+                <button class="btn btn-primary explore-blog-btn" onclick="toggleSidebar()">Explore Blogs</button>
+            </div>
+        </div>
+    </div>
+</section>
+    <!-- Blog 1 -->
+    <div class="blog hidden" id="blog1">
+        <header>
+          <div class="container container-flex">
+              <div class="site-title">
+                  <h1>Managing Skin Allergies in Dogs</h1>
+              </div>
+          </div>
+        </header> 
+      <div class="container container-flex">
+          <main role="main">
+              <article class="article-featured">
+                  <h4 class="article-title">Introduction</h4>
+                  <img src="assets/skin allergy .jpeg" class="article-image">
+                  <p class="article-body">Just like humans, dogs can suffer from skin allergies, leading to itching, redness, and discomfort. Skin allergies can be triggered by food, environmental factors, or parasites.
+                    <br><strong>Causes of Skin Allergies</strong><br>
+                    <ol>
+                   <li> Food Allergies – Proteins like chicken, beef, or dairy can trigger reactions.</li>
+                  <li> Flea Allergy Dermatitis (FAD) – Some dogs are allergic to flea saliva.</li>
+                  <li>Environmental Allergies – Pollen, mold, dust mites, or grass can cause seasonal reactions.</li></ol><br><br>
+                 <strong> Treatment & Management</strong><br>
+                ✔ Antihistamines: Medications like Benadryl (vet-approved) can reduce itching.<br>
+                ✔ Medicated Shampoos: Oatmeal or hypoallergenic shampoos soothe irritated skin.<br>
+                ✔ Dietary Changes: Switching to a hypoallergenic or grain-free diet may help.<br>
+                ✔ Flea Prevention: Monthly flea treatments like NexGard or Bravecto prevent flea allergies.<br>
+
+                💡 Tip: If your dog’s itching persists, visit a veterinarian for allergy testing and possible immunotherapy.
+                  </p>
+              </article>
+      </div>
+      <footer>
+          <p><strong>Living the Simple Life</strong></p>
+          <p>Copyright 2019</p>
+      </footer>
+
+      </div>
+
+
+    <!-- Blog 2 -->
+    <div id="blog2" class="container mt-4 blog">
+        <h3>Effective Treatment for Canine Ear Infections</h3>
+        <p>Ear infections are common in dogs, especially those with floppy ears.</p>
+        <ul>
+            <li>Symptoms: Scratching, redness, bad odor.</li>
+            <li>Causes: Bacteria, yeast overgrowth, or allergies.</li>
+            <li>Treatment: Vet-prescribed ear drops, regular cleaning.</li>
+        </ul>
+        <img src="assets/ear infection.jpeg" class="img-fluid mt-3" alt="Ear Infection">
+    </div>
+
+    <!-- Blog 3 -->
+    <div id="blog3" class="container mt-4 blog">
+        <h3>How to Treat and Prevent Canine Arthritis</h3>
+        <p>Arthritis causes joint pain and reduced mobility in older dogs.</p>
+        <ul>
+            <li>Symptoms: Stiffness, limping, difficulty climbing stairs.</li>
+            <li>Causes: Aging, genetics, excessive weight.</li>
+            <li>Management: Joint supplements, pain relievers, weight control.</li>
+        </ul>
+        <img src="assets/oldage.jpeg" class="img-fluid mt-3" alt="Canine Arthritis">
+    </div>
+
+    <script>
+       function toggleSidebar() {
+    let sidebar = document.getElementById('sidebar');
+    let content = document.getElementById('content');
+    sidebar.classList.toggle('active');
+    content.classList.toggle('shifted');
+}
+
+function showBlog(index) {
+    // Hide all blogs
+    document.querySelectorAll('.blog').forEach(blog => {
+        blog.style.display = 'none';
+    });
+
+    // Show the selected blog
+    let selectedBlog = document.getElementById('blog' + index);
+    if (selectedBlog) {
+        selectedBlog.style.display = 'block';
+    }
+
+    // Hide main content and hero section
+    document.getElementById('content').style.display = 'none';
+    document.querySelector('.hero').style.display = 'none';
+}
+
+function showHome() {
+    // Show main content and hero section again
+    document.getElementById('content').style.display = 'block';
+    document.querySelector('.hero').style.display = 'flex';
+
+    // Hide all blogs
+    document.querySelectorAll('.blog').forEach(blog => {
+        blog.style.display = 'none';
+    });
+}
+
+    </script>
+</body>
+</html>

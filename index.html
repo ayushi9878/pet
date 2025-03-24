@@ -5,16 +5,34 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link
       href="https://cdn.jsdelivr.net/npm/remixicon@4.3.0/fonts/remixicon.css"
-      rel="stylesheet"
-    />
+      rel="stylesheet" />
     <link
       rel="stylesheet"
-      href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"
-    />
+      href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"/>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/js/fontawesome.min.js" integrity="sha512-j12pXc2gXZL/JZw5Mhi6LC7lkiXL0e2h+9ZWpqhniz0DkDrO01VNlBrG3LkPBn6DgG2b8CDjzJT+lxfocsS1Vw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
     <link rel="stylesheet" href="styles.css" />
     <title>Web Design Mastery | Pet Place</title>
   </head>
   <body>
+    <div>
+      <div class="splash-container">
+          <div class="bird-text">
+              <img src="assets/bird1.gif" class="bird" alt="Bird">
+              <div class="text">
+                  <span class="letter" style="animation-delay: 0.2s">W</span>
+                  <span class="letter" style="animation-delay: 0.4s">e</span>
+                  <span class="letter" style="animation-delay: 0.6s">l</span>
+                  <span class="letter" style="animation-delay: 0.8s">c</span>
+                  <span class="letter" style="animation-delay: 1s">o</span>
+                  <span class="letter" style="animation-delay: 1.2s">m</span>
+                  <span class="letter" style="animation-delay: 1.4s">e</span>
+                  <span class="letter" style="animation-delay: 1.6s">!</span>
+              </div>
+          </div>
+      </div>
+  </div>
+  <div class="main-content">
     <nav>
       <div class="nav__header">
         <div class="nav__logo">
@@ -25,11 +43,12 @@
         </div>
       </div>
       <ul class="nav__links" id="nav-links">
-        <li><a href="#home">Home</a></li>
+        <li><a href="index.html">Home</a></li>
         <li><a href="#about">About</a></li>
-        <li><a href="#store">Store</a></li>
-        <li><a href="#service">Services</a></li>
+        <li><a href="store.html">Store</a></li>
+        <li><a href="#store">Blog</a></li>
         <li><a href="#contact">Contact</a></li>
+        <i class="fa-solid fa-paw"></i>
       </ul>
     </nav>
     <header id="home">
@@ -43,8 +62,8 @@
             ensure your pets lead happy, healthy lives.
           </p>
           <div class="header__btn">
-            <button>
-              Start Here!
+            <button> <a  href="https://yogeshsain1.github.io/Chatbot/"> Start  Here </a>
+              
               <span><i class="ri-arrow-right-line"></i></span>
             </button>
           </div>
@@ -144,39 +163,36 @@
         </div>
       </div>
     </section>
-
+    <!-- treatment -->
     <section class="product" id="store">
       <div class="section__container product__container">
         <p class="section__subheader">Products</p>
         <h2 class="section__header">Featured pet products</h2>
-        <div class="product__grid">
-          <div class="product__card">
-            <img src="assets/product-1.jpg" alt="product" />
-            <h4>Dog Trash Bag</h4>
+        <div class="product__grid" >
+          <a href="treatment.html" class="product__card">
+            <img src="assets/treatment.jpeg"  alt="product" />
+            <h4>TREATMENT</h4>
             <p>
-              Convenient and eco-friendly trash bags for easy pet waste
-              disposal.
+              Expert Care for Happy, Healthy Pets!
             </p>
-            <h3>$29.00 USD</h3>
-          </div>
-          <div class="product__card">
-            <img src="assets/product-2.jpg" alt="product" />
-            <h4>Pet Accessories</h4>
+          </a>
+          <!-- Adoption & Rescue Stories -->
+          <a href="Adoption.html" class="product__card">
+            <img src="assets/indian.jpeg" alt="product" />
+            <h4>Adoption & Rescue Stories</h4>
             <p>
-              Explore our range of stylish and functional accessories for your
-              furry friends.
+              Adopt Don't Shop
             </p>
-            <h3>$49.00 USD</h3>
-          </div>
-          <div class="product__card">
+          </a>
+          <!-- Pet Nutrition & Diet -->
+          <a href="PetFood.html" class="product__card">
             <img src="assets/product-3.jpg" alt="product" />
             <h4>Dog Food</h4>
             <p>
-              Nutritious and delicious dog food to keep your pet healthy and
+              Nutritious and delicious food to keep your pet healthy and
               happy.
             </p>
-            <h3>$79.00 USD</h3>
-          </div>
+          </a>
         </div>
       </div>
     </section>
@@ -389,9 +405,11 @@
         Copyright © 2024 Web Design Mastery. All rights reserved.
       </div>
     </footer>
+    </div>
 
     <script src="https://unpkg.com/scrollreveal"></script>
     <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+    <script src=" https://cdn.jsdelivr.net/npm/locomotive-scroll@4.1.4/dist/locomotive-scroll.min.js"></script>
     <script src="main.js"></script>
   </body>
 </html>

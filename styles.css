@@ -133,7 +133,7 @@ header {
 }
 
 .header__container {
-  padding-block: 2rem 0;
+  margin-block: -1rem 0;
   display: grid;
   gap: 2rem;
 }
@@ -732,3 +732,80 @@ img.header__image-bg {
     grid-template-columns: repeat(4, 1fr);
   }
 }
+
+/* pre loader animation */
+.splash-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: #f0f9ff;
+  z-index: 9999;
+  display: flex;
+  justify-content: flex-start; /* Start from leftmost */
+  align-items: center;
+  overflow: hidden;
+}
+
+.bird-text {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  transform: translateX(-100%); /* Start completely off-screen */
+  animation: flyWithText 5s ease-in-out forwards;
+}
+
+.bird {
+  width: 20vw;
+  margin-right: 10px;
+}
+
+.text {
+  display: flex;
+  gap: 5px;
+  font-size: 5vw;
+  font-weight: bold;
+  color: linear-gradient(45deg, #ff6f61, #5a67d8);
+  
+}
+
+.letter {
+  opacity: 0;
+  transform: translateY(10px); 
+  animation: fadeIn 3s ease forwards;
+}
+
+@keyframes flyWithText {
+  0% { transform: translateX(-40VW); }  /* Start fully off-screen */
+  30% { transform: translateX(10vw); }   /* Slow down slightly in the middle */
+  50% { transform: translateX(30vw); }   /* Slow down slightly in the middle */
+  70% { transform: translateX(50vw); }   /* Maintain momentum */
+  100% { transform: translateX(100vw); } /* Fly off to the right */
+}
+
+@keyframes fadeIn {
+  0% { opacity: 0; transform: translateY(5px); }
+  40% { opacity: 1; transform: translateY(0px); }
+  100% { opacity: 1; }
+}
+
+.main-content {
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.5s ease-in-out;
+}
+
+/*infinite crousal */
+.infinite-carousel img {
+            width: 100%;
+            height: auto;
+        }
+        .infinite-carousel-container {
+            padding: 20px;
+        }
+        @media (max-width: 768px) {
+            .infinite-carousel .slick-slide {
+                text-align: center;
+            }
+        }

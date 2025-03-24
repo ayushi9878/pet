@@ -89,3 +89,33 @@ ScrollReveal().reveal(".instagram__grid img", {
   duration: 1000,
   interval: 500,
 });
+//for pre loader
+window.onload = function() {
+  setTimeout(() => {
+      document.querySelector(".splash-container").style.opacity = "0";
+      document.querySelector(".splash-container").style.visibility = "hidden";
+
+      document.querySelector(".main-content").style.opacity = "1";
+      document.querySelector(".main-content").style.visibility = "visible";
+  }, 5000); // Matches animation duration
+};
+
+//infinite carousel in store page 
+$(document).ready(function(){
+  $('.infinite-carousel').slick({
+      infinite: true,
+      slidesToShow: 3,
+      slidesToScroll: 1,
+      autoplay: true,
+      autoplaySpeed: 2000,
+      responsive: [
+          {
+              breakpoint: 768,
+              settings: {
+                  slidesToShow: 1,
+                  arrows: false
+              }
+          }
+      ]
+  });
+});
